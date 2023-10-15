@@ -1,0 +1,25 @@
+<mat-stepper orientation="vertical" linear="true">
+  <mat-step [stepControl]="stepOne">
+    <form [formGroup]="stepOne">
+      <ng-template matStepLabel>Grundlagen</ng-template>
+      <div style="display: flex; flex-direction: column">
+        <mat-form-field>
+          <mat-label>Typ der Immobilie</mat-label>
+          <!-- TODO: Move this into a pipe and iterate through each enum type -->
+          <mat-select required [formControl]="stepOne.controls.immoType">
+            <mat-option [value]="PropertyType.HOUSE">Haus</mat-option>
+            <mat-option [value]="PropertyType.APPARTMENT">Wohnung</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Bundesland der Immobilie</mat-label>
+          <mat-select required [formControl]="stepOne.controls.stateType">
+            <mat-option *ngFor="let state of estateTaxForFederalStates" [value]="state.value">
+              {{state.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-step>
+</mat-stepper>
