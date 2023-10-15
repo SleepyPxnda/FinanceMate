@@ -11,12 +11,25 @@ import {PropertyType} from "../services/types";
 export class StepperComponent {
 
   stepOne = this._formBuilder.group({
-    immoType: ['', Validators.required],
-    stateType: ['', Validators.required]
+    propType: ['', Validators.required],
+    stateType: ['', Validators.required],
+    propPrice: ['', Validators.required]
   });
+
+  stepTwo = this._formBuilder.group({
+    agentCosts: ['', Validators.required]
+  });
+
+  propertyPrice: number = 0;
+  agentCosts: number = 0;
 
   constructor(private _formBuilder: FormBuilder) {}
 
   protected readonly estateTaxForFederalStates = estateTaxForFederalStates;
   protected readonly PropertyType = PropertyType;
+
+  test() {
+    console.log(this.stepOne.get("propPrice")?.value)
+    console.log(this.stepTwo.get("agentCosts")?.value)
+  }
 }
