@@ -6,6 +6,7 @@ function CalculatorComponent() {
   const [propertyPrice, setPropertyPrice] = useState<number>(0);
   const [propertyStateTax, setPropertyStateTax] = useState<number>(0.05);
   const [agentCost, setAgentCost] = useState<number>(0.1);
+  const [propertyRent, setPropertyRent] = useState<number>(0);
 
     return (
       <div>
@@ -47,8 +48,25 @@ function CalculatorComponent() {
             </div>
           </div>
         </div>
-      <SummaryInvestmentCostsComponent propertyPrice={propertyPrice}  propertyStateTax={propertyStateTax} agentCost={agentCost}></SummaryInvestmentCostsComponent>
-      </div> 
+        <SummaryInvestmentCostsComponent propertyPrice={propertyPrice}  propertyStateTax={propertyStateTax} agentCost={agentCost}></SummaryInvestmentCostsComponent>
+        <div className='m-3'>
+          <h1 className="font-bold text-lg">Ertragsrechnung</h1>
+          <div className='m-3'>
+            <div className='mb-2'>
+              <label className='text-blue-700' htmlFor='propertyRentInput'>Monatliche Nettokaltmiete: </label>
+              <input
+                  placeholder='0'
+                  id='propertyRentInput'
+                  step="10"
+                  name='propertyRentInput'
+                  type='number'
+                  onChange={(e) => setPropertyRent(parseInt(e.target.value))}>
+              </input>
+              <span>€</span>
+            </div>
+          </div>
+        </div>
+      </div>
   );
 }
 
@@ -62,7 +80,7 @@ function SummaryInvestmentCostsComponent(props: {propertyPrice: number, property
           <p>Grunderwerbssteuer: {(props.propertyStateTax * 100).toFixed(2)} %</p>
           <p>Maklerkosten ({(props.agentCost * 100).toFixed(2)}%): {(props.propertyPrice * props.agentCost).toFixed(2)} €</p>
           <p>Notarkosten: (1.5%): {(props.propertyPrice * 0.015).toFixed(2)}</p>
-          <p className='text-green-600'>Investitionskosten: {sum.toFixed(2)}</p>
+          <p>Investitionskosten: {sum.toFixed(2)}</p>
         </div>
       </div>
   )
